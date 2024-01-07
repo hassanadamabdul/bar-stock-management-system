@@ -1,0 +1,61 @@
+body {
+    background-color: brown; /* Blue background color */
+    color: #bcf1db; /* Text color */
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 auto;
+    animation: moveLeftToRight 2s infinite alternate; /* Animation for moving from left to right */
+    color: #34e234;
+    background-color: #000;
+}
+
+table {
+    margin: 20px auto;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    /* Change the background color of textboxes */
+    background-color: #2ecc71; /* Change this color to your preference */
+    /* Add any other styles for textboxes as needed */
+    color: #fff; /* Text color */
+    border: 1px solid #2ecc71; /* Example border style */
+    padding: 5px; /* Example padding */
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+@keyframes moveLeftToRight {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: 200px; /* Adjust the distance to your preference */
+    }
+}
+button {
+    display: block;
+    margin: 20px auto; /* Adjust margin to your preference */
+    padding: 10px;
+    cursor: pointer;
+}
+th {
+    background-color: #000; /* Black header background color */
+    color: #d1f048; /* Header text color */
+}

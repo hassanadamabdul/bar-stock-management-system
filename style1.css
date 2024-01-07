@@ -1,0 +1,65 @@
+body {
+    background-color: rgb(201, 14, 45);
+    color: #3fb4f8;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 auto;
+    animation: moveLeftToRight 2s infinite alternate;
+    color: #000;
+}
+
+table {
+    margin: 20px auto;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.center-text {
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+@keyframes moveLeftToRight {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: 200px;
+    }
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    cursor: pointer;
+}
+
+th {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Additional styling for MPESA label and value */
+#mpesa-label,
+#mpesa,
+#mpesa-value {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totals Page</title>
+    <link rel="stylesheet" type="text/css" href="style_total.css">
+</head>
+
+<body>
+
+    <h1>HIGH 5 STOCK MANAGEMENT SYSTEM</h1>
+
+    <div id="totalsContainer">
+        <!-- Totals will be displayed here -->
+        <p>Total Amount: KSH <span id="totalAmount"></span></p>
+        <p>Total Profit: KSH <span id="totalProfit"></span></p>
+
+        <!-- Input box for KEG SALES -->
+        <label for="kegSales">KEG SALES:</label><br>
+        <input type="number" id="kegSales" placeholder="Enter KEG SALES amount"><br><br>
+
+        <!-- Input box for KEG PROFIT -->
+        <label for="kegProfit">KEG PROFIT:</label><br>
+        <input type="number" id="kegProfit" placeholder="Enter KEG PROFIT amount"><br><br>
+
+        <button onclick="updateTotals()">Update Totals</button><br>
+
+        <!-- Display KEG SALES and KEG PROFIT amounts -->
+        <p>Bar and Keg Sales: KSH <span id="barAndKegSales"></span></p>
+        <p>Bar and Keg Profit: KSH <span id="barAndKegProfit"></span></p>
+
+        <label for="mpesaAmount">MPESA:</label><br>
+        <input type="number" id="mpesaAmount" placeholder="Enter MPESA amount"><br><br>
+
+        <!-- Display MPESA amount -->
+        <p id="displayMpesaAmount"></p>
+
+        <button onclick="getCashout()">Get Cashout</button><br>
+
+        <label for="expenses">Expenses:</label><br>
+        <input type="number" id="expenses" placeholder="Enter Expenses amount"><br><br>
+
+        <button onclick="subtractExpenses()">Subtract Expenses</button><br>
+
+        <!-- Display remaining amount -->
+        <p>Remaining Amount: KSH <span id="remainingAmount"></span></p>
+    </div>
+
+    <script>
+        // Retrieve totals from the URL parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var totalAmount = parseFloat(urlParams.get('totalAmount')) || 0;
+        var totalProfit = parseFloat(urlParams.get('totalProfit')) || 0;
+
+        // Display totals in the container
+        document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        document.getElementById('totalProfit').textContent = totalProfit.toFixed(2);
+
+        // Initialize barAndKegSales outside of functions
+        var barAndKegSales = 0;
+
+        function updateTotals() {
+            var kegSales = parseFloat(document.getElementById('kegSales').value) || 0;
+            var kegProfit = parseFloat(document.getElementById('kegProfit').value) || 0;
+
+            // Calculate Bar and Keg Sales and Bar and Keg Profit
+            barAndKegSales = totalAmount + kegSales;
+            var barAndKegProfit = totalProfit + kegProfit;
+
+            // Display updated Bar and Keg Sales and Bar and Keg Profit
+            document.getElementById('barAndKegSales').textContent = barAndKegSales.toFixed(2);
+            document.getElementById('barAndKegProfit').textContent = barAndKegProfit.toFixed(2);
+
+            // Update remaining amount after updating totals
+            updateRemainingAmount();
+        }
+
+        function getCashout() {
+            var mpesaAmount = parseFloat(document.getElementById('mpesaAmount').value) || 0;
+
+            if (mpesaAmount < 0) {
+                alert('MPESA amount cannot be negative.');
+                return;
+            }
+
+            if (mpesaAmount > barAndKegSales) {
+                alert('MPESA amount cannot exceed Bar and Keg Sales.');
+                return;
+            }
+
+            // Display MPESA amount and update the remaining total amount
+            document.getElementById('displayMpesaAmount').textContent = 'MPESA: KSH ' + mpesaAmount.toFixed(2);
+
+            // Subtract MPESA amount from Bar and Keg Sales
+            var remainingAmount = barAndKegSales - mpesaAmount;
+
+            // Display the remaining amount
+            document.getElementById('remainingAmount').textContent = remainingAmount.toFixed(2);
+        }
+
+        function subtractExpenses() {
+            var expensesAmount = parseFloat(document.getElementById('expenses').value) || 0;
+
+            if (expensesAmount < 0) {
+                alert('Expenses amount cannot be negative.');
+                return;
+            }
+
+            // Subtract Expenses amount from the remaining amount
+            var remainingAmount = parseFloat(document.getElementById('remainingAmount').textContent) || 0;
+            var updatedRemainingAmount = remainingAmount - expensesAmount;
+
+            // Display the updated remaining amount
+            document.getElementById('remainingAmount').textContent = updatedRemainingAmount.toFixed(2);
+        }
+
+        function updateRemainingAmount() {
+            // Update remaining amount after updating totals
+            var expensesAmount = parseFloat(document.getElementById('expenses').value) || 0;
+            var remainingAmount = barAndKegSales - expensesAmount;
+
+            // Display the updated remaining amount
+            document.getElementById('remainingAmount').textContent = remainingAmount.toFixed(2);
+        }
+    </script>
+
+    <script>
+        function printReport() {
+            // Get the current date and time
+            var currentDate = new Date();
+            var formattedDate = currentDate.toLocaleDateString();
+            var formattedTime = currentDate.toLocaleTimeString();
+
+            // Create a string with date and time information
+            var dateTimeString = 'Printed on ' + formattedDate + ' at ' + formattedTime;
+
+            // Add the date and time information to the document
+            var dateElement = document.createElement('p');
+            dateElement.textContent = dateTimeString;
+            document.body.appendChild(dateElement);
+
+            // Trigger the print function
+            window.print();
+
+            // Remove the added date and time information from the document
+            document.body.removeChild(dateElement);
+        }
+    </script>
+
+    <button onclick="printReport()" style="display: block; margin: 0 auto;">Print Report</button>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+body {
+    background-color: #8B4513; /* Brown background color */
+    color: #FFF; /* White text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #2E8B57; /* Dark Olive Green header background color */
+    margin: 0;
+}
+
+#totalsContainer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+p {
+    margin: 10px;
+}
+
+label {
+    color: #2E8B57; /* Dark Olive Green label color */
+}
+
+input {
+    color: #8B4513; /* Brown text color for the input */
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #2E8B57; /* Dark Olive Green border color */
+    border-radius: 5px;
+}
+
+button {
+    background-color: #2E8B57; /* Dark Olive Green button background color */
+    color: #FFF; /* White text color */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #228B22; /* Forest Green on hover */
+}
+
+#mpesaLabel, #displayMpesaAmount, #displayExpenses {
+    color: #FFD700; /* Gold text color for the MPESA and Expenses labels */
+    font-weight: bold;
+}
+
+@keyframes marquee {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
